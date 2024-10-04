@@ -81,4 +81,6 @@ Se propone agregar varias tablas catalogo para lograr normalizar la base de dato
 
 Además de la normalización, se recomienda optimizar las búsquedas mediante la creación de procedimientos almacenados e índices en las tablas. Esto permitirá que la base de datos precompile los planes de ejecución, mejorando considerablemente los tiempos de consulta. 
 
+También se recomienda paginar las consultas para que así el set de registros devueltos en la consulta sea menor y la experiencia de usuario mejore.
+
 
