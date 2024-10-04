@@ -31,3 +31,16 @@
 -   **Creación servicio de likes
 -   **Propuestas en el readme
 
+
+
+## Endpoints
+
+### Propiedades
+```
+GET /properties
+Filtros opcionales:
+- year (int)
+- city (string)
+- status (string: pre_venta, en_venta, vendido)
+```
+
