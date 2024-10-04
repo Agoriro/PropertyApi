@@ -44,22 +44,41 @@ Filtros opcionales:
 - status (string: pre_venta, en_venta, vendido)
 ```
 
-## Modelo entidad relación de los likes
+# Modelo entidad relación de los likes
 
 ![image](https://github.com/user-attachments/assets/f7f1f54d-765d-4802-a274-b3fb1f022ab8)
 
-Con este modelo se busca que se puedan registrar los likes, dados por los usuarios registrados, hay que tener en cuenta que se debe crear un unique index con los campos de 
-user_id y property_id para que un usuario solo le pueda dar like a una propiedad, con este modelo se proyecta a futuro, poder generar información como:
+Este modelo permite registrar los likes otorgados por usuarios registrados a propiedades específicas. Es importante definir un índice único con los campos user_id y property_id para evitar duplicidades en los likes. Este modelo soporta futuras funcionalidades como:
 
-- el usuario a que propiedades le dio like
-- Que usuarios le dieron like a una propiedad en especifico
-- Ranking de propiedades por like
-- Toda esta información también se podrá filtrar por la fecha en la que se dio el like
+-  Obtener las propiedades que han sido marcadas con like por un usuario.
+-  Saber qué usuarios han dado like a una propiedad específica.
+-  Generar rankings de propiedades más populares (por cantidad de likes).
+-  Filtrar la información por fecha en la que se dio el like.
 
 
-## Propuesta mejora modelo entidad relación 
+
+# Propuesta mejora modelo entidad relación 
 
 ![image](https://github.com/user-attachments/assets/a68fa28f-f060-42f5-bf7c-4bdbdffa2e38)
 
+Se propone agregar varias tablas catalogo para lograr normalizar la base de datos y mejorar la velocidad de las consultas.
+
+#### Tablas 
+- cities
+- departaments
+- countries
+- type
+- features
+- properties_features
+- type_features
+
+#### Explicación de tablas
+-   **cities, departaments, countries**: Estas tablas permiten normalizar los datos, mejorando la velocidad de las consultas mediante búsquedas por ID (entero) en lugar de texto. Además, facilitan la creación de endpoints     que permitan filtrar inmuebles por departamento o país.
+-   **type**: Clasifica los tipos de propiedades (ej. Apartamento, Casa, Bodega, Parqueadero). Esto mejora las búsquedas por tipo y garantiza integridad referencial.
+-   **features, properties_features, type_features**: Estas tablas refuerzan la capacidad de búsqueda personalizada al almacenar información detallada sobre las características de las propiedades (ej. número de habitaciones, garaje, cocina). Así se puede realizar una búsqueda precisa y eficiente.
+
+## **Recomendaciones Adicionales**
+
+Además de la normalización, se recomienda optimizar las búsquedas mediante la creación de procedimientos almacenados e índices en las tablas. Esto permitirá que la base de datos precompile los planes de ejecución, mejorando considerablemente los tiempos de consulta. 
 
 
